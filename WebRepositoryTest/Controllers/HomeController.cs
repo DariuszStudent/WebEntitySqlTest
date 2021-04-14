@@ -12,23 +12,28 @@ namespace WebRepositoryTest.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IServiceProvider mServiceProvider;
         private readonly ICarsRepository mCarsRepository;
+        private readonly CarMapper mCarMapper;
 
         public HomeController(ILogger<HomeController> logger,
             IServiceProvider serviceProvider,
-            ICarsRepository carsRepository)
+            ICarsRepository carsRepository,
+            CarMapper carMapper)
         {
             _logger = logger;
             mServiceProvider = serviceProvider;
             mCarsRepository = carsRepository;
+            mCarMapper = carMapper;
         }
 
         public IActionResult Index()
         {
-            mCarsRepository.UpdateCar(new Car
-            {
-                Name = "Audi",
-                Color = "Yellow"
-            });
+            var car = mCarsRepository.GetSettingByName("Porshe");
+
+            var dataModelSetting = mCarMapper.Map(car);
+
+            dataModelSetting.Color = "brown";
+
+            mCarsRepository.SaveChanges();
 
             var databaseCars = mCarsRepository.GetAll();
 

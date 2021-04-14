@@ -25,6 +25,8 @@ namespace WebRepositoryTest
 
             services.AddScoped<ICarsRepository, CarsRepository>();
 
+            services.AddScoped<CarMapper>();
+
             services.AddControllersWithViews();
         }
 

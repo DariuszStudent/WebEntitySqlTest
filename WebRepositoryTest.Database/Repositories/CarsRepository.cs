@@ -21,5 +21,12 @@ namespace WebRepositoryTest.Database
 
             foundCar.Color = car.Color;
         }
+
+        public Car GetSettingByName(string name)
+        {
+            var foundCar = DbSet.Where(x => x.Name == name).FirstOrDefault();
+
+            return foundCar;
+        }
     }
 }
