@@ -27,19 +27,7 @@ namespace WebRepositoryTest.Controllers
 
         public IActionResult Index()
         {
-            var car = mCarsRepository.GetSettingByName("Porshe");
-
-            var dataModelSetting = mCarMapper.Map(car);
-
-            dataModelSetting.Color = "brown";
-
-            mCarsRepository.SaveChanges();
-
-            var databaseCars = mCarsRepository.GetAll();
-
-            return Ok(databaseCars);
-
-            //return View();
+            return View();
         }
 
         public IActionResult Privacy()

@@ -12,5 +12,21 @@ namespace WebRepositoryTest.Database
         {
             
         }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            base.OnModelCreating(builder);
+
+            builder.Entity<Car>(options =>
+            {
+                options.HasOne(x => x.User);
+            });
+
+            builder.Entity<ApplicationUser>(options =>
+            {
+                options.Property(x => x.FirstName).HasMaxLength(27);
+                options.Property(x => x.PhoneNumber).IsRequired();
+            });
+        }
     }
 }

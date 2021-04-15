@@ -8,5 +8,6 @@ namespace WebRepositoryTest.Database
         void UpdateCar(Car car);
         Car GetSettingByName(string name);
         void SaveChanges();
+        void DoSomething();
     }
 }

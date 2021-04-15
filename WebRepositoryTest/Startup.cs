@@ -33,12 +33,6 @@ namespace WebRepositoryTest
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IServiceProvider serviceProvider)
         {
-            var database = serviceProvider.GetService<WebRepositoryTestDbContext>();
-
-            database.Database.EnsureCreated();
-
-            database.SaveChanges();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -62,6 +56,10 @@ namespace WebRepositoryTest
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            var database = serviceProvider.GetService<WebRepositoryTestDbContext>();
+
+            database.Database.Migrate();
         }
     }
 }
